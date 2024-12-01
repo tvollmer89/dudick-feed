@@ -56,7 +56,7 @@ const parseFeed = () => {
     format: true
   });
   const xmlOutput = builder.build(products);
-  console.log(`xml: ${xmlOutput}`)
+  console.log(`xml: ${xmlOutput}`);
 }
 
 // const builder = new XMLBuilder();
