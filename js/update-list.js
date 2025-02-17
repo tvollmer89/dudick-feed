@@ -63,6 +63,14 @@ const setProdInfo = (prod, groupName, itemName, label) => {
     d = prod[groupName][itemName].toString().replace(",Misc (grouts, fillers, caulks, tapes, sealers)", "");
 
   } else {
+    // *just trying to fix the special character problem 
+    // if(prod[groupName].hasOwnProperty(itemName)) {
+    //   d = prod[groupName][itemName].toString().replace("Polyureas", \u0026);
+
+    //   d = prod[groupName][itemName].toString().replace(/\s\&\s/i, " &amp; ");
+    // } else {
+    //   d = "";
+    // }
     d = !prod[groupName].hasOwnProperty(itemName) ? "" : prod[groupName][itemName].toString();
   }
   detail = d == "" ? [] : d.split(",").map(t => {
