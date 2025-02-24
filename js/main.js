@@ -29,6 +29,7 @@ const parseFeed = () => {
   const options = {
     ignoreAttributes: false,
     attributeNamePrefix : "@_",
+    processEntities: false
   };
   const parser = new XMLParser(options);
   let json = parser.parse(xmlFile);

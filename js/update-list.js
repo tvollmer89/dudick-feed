@@ -4,8 +4,12 @@
 * @return {array} new product list as JSON object
  */
 const updateList = oldList => {
-  let newList = [];
+  let date = new Date();
+  let prodList = [];
+  let newList = {"date": date.toLocaleDateString('en-US'), "dateFull": date.toString()};
   oldList.forEach((p) => {
+    
+    console.log(`date: ${date}`)
     let types = setProdInfo(p, "producttypes", "producttype", "type");
     let applications = setProdInfo(p, "prodapplications", "application", "application");
     let markets = setProdInfo(p, "prodmarkets", "market", "market");
@@ -38,8 +42,10 @@ const updateList = oldList => {
       locale: p["@_locale"]
       
     };
-    newList.push({"product": newProd})
+    prodList.push({"product": newProd})
   })
+  newList.prodCount = prodList.length;
+  newList.products = prodList;
 
   let list = JSON.stringify(newList, undefined, 2);
   document.getElementById("feed-container").innerHTML = list;

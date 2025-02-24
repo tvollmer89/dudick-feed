@@ -4,11 +4,14 @@
   "description": "Reconfiguring the Dudick product feed.",
   "author": "Theresa Vollmer",
   "scripts": {
-    "prebuild": "rm -rf dist",
+    "prebuild": "rm -rf dist output",
     "sass": "parcel build ./scss/style.scss",
     "build": "parcel build index.html",
+    "build:prod": "parcel build index.html --dist-dir output",
     "dev": "parcel index.html --open",
+    "dev:prod": "parcel output/index.html --open",
     "start": "npm run build && npm run dev",
+    "start:prod": "npm run build:prod && npm run dev:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
