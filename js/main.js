@@ -38,8 +38,8 @@ const parseFeed = () => {
   // console.log(`json count: ${Object.keys(json.carbproductlist)}`)
   
   const dudickProducts = productList.filter((p) => p.brand == "Dudick");
-  console.log(`data: ${JSON.stringify(dudickProducts)}`);
-  console.log(`dudick product count: ${dudickProducts.length}`)
+  // console.log(`data: ${JSON.stringify(dudickProducts)}`);
+  // console.log(`dudick product count: ${dudickProducts.length}`)
   // productList.forEach(i => console.log(`i: ${i.productname}`))
   dudickProducts.sort(function(a,b){
     var textA = a.productname.toUpperCase();
@@ -57,7 +57,7 @@ const parseFeed = () => {
     format: true
   });
   const xmlOutput = builder.build(products);
-  console.log(`xml: ${xmlOutput}`);
+  // console.log(`xml: ${xmlOutput}`);
 }
 
 // const builder = new XMLBuilder();

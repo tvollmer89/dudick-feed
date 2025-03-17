@@ -9,7 +9,6 @@ const updateList = oldList => {
   let newList = {"date": date.toLocaleDateString('en-US'), "dateFull": date.toString()};
   oldList.forEach((p) => {
     
-    console.log(`date: ${date}`)
     let types = setProdInfo(p, "producttypes", "producttype", "type");
     let applications = setProdInfo(p, "prodapplications", "application", "application");
     let markets = setProdInfo(p, "prodmarkets", "market", "market");
@@ -66,9 +65,52 @@ const setProdInfo = (prod, groupName, itemName, label) => {
   if(groupName == "prodapplications" && prod[groupName].hasOwnProperty(itemName)){
     // TODO: Ignore Misc. 
     // !If Misc is absolutely required, just change the replace to say "Misc" or whatever
-    d = prod[groupName][itemName].toString().replace(",Misc (grouts, fillers, caulks, tapes, sealers)", "");
-
+    d = prod[groupName][itemName].toString().replace("Misc (grouts, fillers, caulks, tapes, sealers)", "");
+    console.log(`application: ${d}`)
+  } else if (groupName == "prodmarkets" && prod[groupName].hasOwnProperty(itemName)) {
+    console.log(`groupName: ${groupName}, itemName: ${itemName} - ${prod[groupName][itemName].toString()}`)
+    let marketList = prod[groupName][itemName].toString().split(',');
+    let mList = marketList.map(m => {
+      switch(m){
+        case "Automotive":
+        case "Electronics":
+          return "Semiconductor & EV";
+        case "Chemical Processing/Refining":
+        case "Petrochemical":
+          return "Chemical Processing";
+        case "Commercial &amp; Architectural":
+          return "Healthcare";
+        case "Flooring":
+        case "Other":
+        case "Distributor":
+        case "Metals &amp; Mining":
+        case "Power - Thermal Fuel":
+        case "Water &amp; Wastewater":
+        case "Pulp &amp; Paper":
+        case "Oil &amp; Gas Midstream":
+        case "Government/Military":
+        case "Secondary Containment":
+        case "Storage Tanks":
+        case "OEM":
+        case "Multiple Markets":
+        case "Power - Nuclear":
+          return "";
+        default:
+          return m;
+      }
+    })
+    // console.log(`mList: ${mList}`)
+    // d = prod[groupName][itemName].toString();
+    // d = mList.filter((x,i, arr) => {
+    //   if(x != "" && 
+    // }).toString();
+    let unique = [...new Set(mList)];
+    console.log(`unique: ${unique}`)
+    d = unique.filter(x => x != "").toString();
+    console.log(`d: ${d}`)
+    
   } else {
+
     // *just trying to fix the special character problem 
     // if(prod[groupName].hasOwnProperty(itemName)) {
     //   d = prod[groupName][itemName].toString().replace("Polyureas", \u0026);
@@ -84,6 +126,7 @@ const setProdInfo = (prod, groupName, itemName, label) => {
     obj[label] = t;
     return obj;
   })
+  console.log(`detail: ${JSON.stringify(detail)}`)
   return detail;
 }
 
