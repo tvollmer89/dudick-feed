@@ -81,7 +81,6 @@ const setProdInfo = (prod, groupName, itemName, label) => {
         case "Commercial &amp; Architectural":
           return "Healthcare";
         case "Flooring":
-        case "Other":
         case "Distributor":
         case "Metals &amp; Mining":
         case "Power - Thermal Fuel":
@@ -94,16 +93,11 @@ const setProdInfo = (prod, groupName, itemName, label) => {
         case "OEM":
         case "Multiple Markets":
         case "Power - Nuclear":
-          return "";
+          return "Other";
         default:
           return m;
       }
     })
-    // console.log(`mList: ${mList}`)
-    // d = prod[groupName][itemName].toString();
-    // d = mList.filter((x,i, arr) => {
-    //   if(x != "" && 
-    // }).toString();
     let unique = [...new Set(mList)];
     console.log(`unique: ${unique}`)
     d = unique.filter(x => x != "").toString();
